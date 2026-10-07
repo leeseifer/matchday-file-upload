@@ -1,0 +1,7 @@
+**/__tests__/**
+**/jsconfig.json
+node_modules/
+prototypes/
+docs/
+scripts/
+.github/

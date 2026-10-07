@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <classAccesses><apexClass>MatchdayFileUploadController</apexClass><enabled>true</enabled></classAccesses>
+    <description>Access to Matchday upload confirmation and its retry key. Existing record and Salesforce Files permissions still apply.</description>
+    <fieldPermissions><editable>true</editable><field>ContentVersion.Matchday_Upload_Key__c</field><readable>true</readable></fieldPermissions>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>Matchday File Upload</label>
+</PermissionSet>

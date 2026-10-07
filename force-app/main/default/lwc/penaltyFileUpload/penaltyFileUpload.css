@@ -1,0 +1,1488 @@
+:host {
+  display: block;
+  color: #202d32;
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  --ink: #202d32;
+  --muted: #7a8585;
+  --line: #e4e7df;
+  --cream: #fbfcf7;
+  --coral: #e5684c;
+}
+* {
+  box-sizing: border-box;
+}
+button,
+input {
+  font: inherit;
+}
+button {
+  cursor: pointer;
+}
+button:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid #e9993b;
+  outline-offset: 4px;
+}
+button {
+  color: inherit;
+}
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+.upload-arena {
+  background: #fff;
+  border: 1px solid #dde3dc;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px #213b2610;
+  container-type: inline-size;
+}
+.arena-header {
+  padding: 24px 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  gap: 12px;
+}
+.arena-brand {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.brand-icon {
+  display: grid;
+  place-items: center;
+  background: #ed7256;
+  color: white;
+  font-size: 29px;
+  font-weight: 700;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  transform: rotate(-7deg);
+}
+h2 {
+  font-size: 25px;
+  font-weight: 780;
+  letter-spacing: -1.2px;
+  line-height: 1.1;
+}
+.eyebrow {
+  font-size: 9px;
+  letter-spacing: 1.3px;
+  font-weight: 700;
+  color: #84908c;
+}
+.arena-brand .eyebrow {
+  display: block;
+  margin-top: 6px;
+  font-size: 8px;
+  letter-spacing: 1.55px;
+}
+.preview-badge {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: #f3f5ef;
+  border: 1px solid #e5e9df;
+  padding: 7px 10px;
+  border-radius: 6px;
+  font-size: 8px;
+  font-weight: 750;
+  letter-spacing: 1px;
+  color: #697770;
+  white-space: nowrap;
+}
+.preview-badge i {
+  width: 5px;
+  height: 5px;
+  background: #8ca28a;
+  border-radius: 50%;
+}
+.arena-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+}
+.game-column {
+  min-width: 0;
+  padding: 22px;
+}
+.match-bar {
+  background: #213b36;
+  color: #c6d9cc;
+  border-radius: 10px 10px 0 0;
+  padding: 13px 17px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  font-size: 8px;
+  letter-spacing: 1.2px;
+  font-weight: 700;
+}
+.match-bar > span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.live-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #a8e4a8;
+  box-shadow: 0 0 7px #86e99e88;
+}
+.score {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.score > span {
+  font-size: 19px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
+  color: #f3f4df;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.score small {
+  font-size: 7px;
+  letter-spacing: 0.7px;
+  color: #b1c8b9;
+}
+.score b {
+  font-size: 16px;
+  color: #6e8e7e;
+}
+.match-number {
+  color: #9fbdab;
+}
+.pitch {
+  height: auto;
+  aspect-ratio: 1.43;
+  position: relative;
+  background: #2e664f;
+  overflow: hidden;
+  isolation: isolate;
+  touch-action: pan-y;
+}
+.stadium-roof {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 6%;
+  background: #172e2d;
+  border-top: 1px solid #496355;
+  color: #a5b8a4;
+  text-align: center;
+  font-size: 7px;
+  font-weight: 750;
+  padding-top: 7px;
+  letter-spacing: 2px;
+  z-index: 1;
+}
+.stands {
+  position: absolute;
+  top: 6%;
+  height: 25%;
+  width: 100%;
+  background: linear-gradient(#355b50, #264b42);
+  overflow: hidden;
+  contain: layout paint;
+}
+.stand-row {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: #182f294a;
+  box-shadow: 0 2px 0 #9cb69c26;
+}
+.row-one {
+  top: 32%;
+}
+.row-two {
+  top: 61%;
+}
+.row-three {
+  top: 91%;
+}
+.crowd-section {
+  position: absolute;
+  width: 33.334%;
+  height: 30%;
+  animation: sectionSway 2.3s ease-in-out var(--section-delay) infinite;
+  transform-origin: 50% 100%;
+}
+.fan {
+  position: absolute;
+  left: var(--fan-x);
+  top: 0;
+  width: 19px;
+  height: 28px;
+  transform-origin: 50% 100%;
+  z-index: 1;
+}
+.fan-head {
+  position: absolute;
+  left: 6px;
+  top: 0;
+  width: 8px;
+  height: 9px;
+  background: var(--skin);
+  border-radius: 50% 50% 45% 45%;
+  box-shadow: inset 0 2px #2a302c;
+}
+.fan-body {
+  position: absolute;
+  left: 4px;
+  top: 10px;
+  width: 12px;
+  height: 15px;
+  background: var(--shirt);
+  border-radius: 5px 5px 1px 1px;
+  box-shadow: 0 3px #1c3330;
+}
+.arm {
+  position: absolute;
+  top: 12px;
+  width: 4px;
+  height: 13px;
+  background: var(--shirt);
+  border-radius: 3px;
+  transform-origin: 50% 2px;
+}
+.arm:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 4px;
+  height: 4px;
+  background: var(--skin);
+  border-radius: 2px;
+}
+.arm-left {
+  left: 3px;
+  transform: rotate(20deg);
+}
+.arm-right {
+  left: 14px;
+  transform: rotate(-20deg);
+}
+.fan-1 {
+  transform: scale(0.87);
+}
+.fan-3 .arm-left {
+  transform: rotate(120deg);
+}
+.fan-4 .arm-right {
+  transform: rotate(-135deg);
+}
+.flag {
+  display: none;
+  position: absolute;
+  left: 19px;
+  top: -9px;
+  width: 2px;
+  height: 34px;
+  background: #e0d4b5;
+  transform: rotate(15deg);
+  transform-origin: bottom;
+  animation: flagWave 1.6s ease-in-out var(--delay) infinite;
+}
+.flag:after {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0;
+  width: 20px;
+  height: 13px;
+  background: var(--shirt);
+  clip-path: polygon(0 0, 100% 15%, 92% 90%, 0 100%);
+  box-shadow: inset 0 5px #fff4;
+}
+.flag-fan .flag {
+  display: block;
+}
+.flag-fan .arm-right {
+  transform: rotate(-145deg);
+}
+.stadium-banner {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 30%;
+  height: 6%;
+  background: #f0d69e;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 10px;
+  padding: 0 10px;
+  font-size: 6px;
+  font-weight: 900;
+  letter-spacing: 1.1px;
+  color: #324a38;
+  box-shadow: 0 4px 0 #1e573e66;
+  z-index: 3;
+}
+.banner-center {
+  font-size: 7px;
+}
+.turf {
+  position: absolute;
+  inset: 35% 0 0;
+  background: repeating-linear-gradient(
+    180deg,
+    #78a570 0%,
+    #78a570 15%,
+    #72a06a 15%,
+    #72a06a 30%
+  );
+}
+.turf:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 30%, #d7edab22, transparent 70%),
+    linear-gradient(
+      90deg,
+      #1e542726,
+      transparent 25%,
+      transparent 75%,
+      #1e542726
+    );
+  pointer-events: none;
+}
+.penalty-box {
+  position: absolute;
+  left: 9%;
+  top: 12%;
+  width: 82%;
+  height: 58%;
+  border: 2px solid #d4e5b580;
+  transform: perspective(190px) rotateX(20deg);
+}
+.six-yard-box {
+  position: absolute;
+  left: 27%;
+  top: 8%;
+  width: 46%;
+  height: 33%;
+  border: 2px solid #d4e5b580;
+}
+.penalty-arc {
+  position: absolute;
+  left: 34%;
+  top: 58%;
+  width: 32%;
+  height: 24%;
+  border: 2px solid #d4e5b580;
+  border-top: 0;
+  border-radius: 0 0 50% 50%;
+}
+.spot {
+  position: absolute;
+  top: 72%;
+  left: 49.3%;
+  width: 1.4%;
+  height: 1.5%;
+  border-radius: 50%;
+  background: #e0e9c8;
+}
+.field-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 2px;
+  border-bottom: 2px solid #c8ddaf77;
+}
+.goal {
+  position: absolute;
+  top: 35%;
+  left: 22%;
+  width: 56%;
+  height: 27%;
+  z-index: 4;
+  filter: drop-shadow(2px 8px 2px #1a382733);
+}
+.goal-depth {
+  position: absolute;
+  inset: 0 0 -5%;
+  border: 3px solid #bfccb6;
+  transform: perspective(200px) rotateX(6deg);
+  border-bottom: 0;
+  background: #344e3838;
+}
+.net {
+  position: absolute;
+  inset: 3px;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 10px,
+      #eef5de63 10px,
+      #eef5de63 11px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 13px,
+      #eef5de63 13px,
+      #eef5de63 14px
+    ),
+    linear-gradient(#3d69554d, #eff9e022);
+  border-bottom: 2px solid #d9e7c2;
+  box-shadow: inset 0 8px 10px #173a3022;
+}
+.goal-frame {
+  position: absolute;
+  inset: 0;
+  border: 5px solid #f7f4e2;
+  border-bottom: 0;
+  border-radius: 4px 4px 0 0;
+  box-shadow:
+    inset 1px 2px #fff,
+    2px 0 #183b3844;
+}
+.keeper {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  width: 15%;
+  height: 25%;
+  transform: translateX(-50%);
+  z-index: 6;
+  will-change: transform;
+}
+.keeper-figure {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.keeper-shadow {
+  fill: #173b2b42;
+}
+.keeper-legs,
+.keeper-arms {
+  stroke: #152f35;
+  stroke-width: 10;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.keeper-arms {
+  stroke: #f8c05a;
+  stroke-width: 10;
+}
+.keeper-gloves {
+  stroke: #eaf0de;
+  stroke-width: 10;
+  stroke-linecap: round;
+}
+.keeper-shirt {
+  fill: #f9c452;
+  stroke: #e4a73d;
+  stroke-width: 1.5;
+}
+.keeper-shorts {
+  fill: #233c3d;
+}
+.keeper-head,
+.keeper-neck {
+  fill: #c68a62;
+}
+.keeper-hair {
+  fill: #293433;
+}
+.keeper-face {
+  stroke: #553c2e;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  fill: none;
+}
+.keeper-number {
+  font-size: 16px;
+  font-weight: 800;
+  fill: #fff1b9;
+}
+.keeper-shoes {
+  stroke: #e9ede0;
+  stroke-width: 8;
+  stroke-linecap: round;
+}
+.keeper-limbs {
+  transform-origin: 50px 110px;
+  animation: keeperReady 1.4s ease-in-out infinite;
+}
+.ball-position {
+  position: absolute;
+  inset: 0;
+  transform: translate3d(50%, 82%, 0);
+  pointer-events: none;
+  z-index: 10;
+  will-change: transform;
+}
+.ball-position.in-net {
+  z-index: 5;
+}
+.match-ball {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 12%;
+  aspect-ratio: 1;
+  border: 0;
+  padding: 0;
+  background: none;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+  user-select: none;
+  -webkit-user-drag: none;
+  z-index: 10;
+  touch-action: none;
+  pointer-events: auto;
+  cursor: grab;
+  filter: drop-shadow(0 4px 2px #17382b40);
+}
+.match-ball svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+.match-ball.in-net {
+  z-index: 5;
+  pointer-events: none;
+}
+.match-ball:hover {
+  filter: drop-shadow(0 0 9px #fffa);
+}
+.match-ball:active {
+  cursor: grabbing;
+}
+.match-ball:disabled {
+  opacity: 1;
+}
+.ball-base {
+  fill: var(--ball-color);
+}
+.ball-pattern {
+  fill: #253639;
+  fill-opacity: 0.76;
+}
+.ball-seams {
+  fill: none;
+  stroke: #263a37;
+  stroke-width: 1.3;
+}
+.ball-shadow {
+  position: absolute;
+  left: 50%;
+  top: 90%;
+  transform: translate(-50%, -50%);
+  width: 13%;
+  height: 3%;
+  background: #24452c40;
+  filter: blur(3px);
+  border-radius: 50%;
+}
+.ball-type {
+  position: absolute;
+  left: 50%;
+  top: 91%;
+  transform: translateX(-50%);
+  font-size: 8px;
+  font-weight: 850;
+  color: #e8f0da;
+  letter-spacing: 1.5px;
+  z-index: 11;
+  background: #33593c80;
+  border-radius: 3px;
+  padding: 2px 5px;
+}
+.pitch-instruction {
+  position: absolute;
+  right: 4%;
+  bottom: 10%;
+  font-size: 6px;
+  letter-spacing: 1px;
+  font-weight: 750;
+  color: #eef3d6;
+  transform: rotate(-8deg);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.flick-arrow {
+  font-family: Georgia, serif;
+  font-size: 34px;
+  font-weight: normal;
+}
+.aiming .match-ball {
+  filter: drop-shadow(0 0 9px #fffa);
+  cursor: grabbing;
+}
+.keeper-mood {
+  position: absolute;
+  left: 60%;
+  top: -12%;
+  color: #f8e4bb;
+  font-size: 18px;
+  font-weight: 900;
+  transform: rotate(12deg);
+  animation: keeperSteam 0.4s ease-in-out infinite alternate;
+}
+.keeper.angry .keeper-limbs {
+  animation: keeperUpset 0.38s ease-in-out infinite;
+}
+.keeper.angry .keeper-arms,
+.keeper.angry .keeper-gloves {
+  transform-origin: 50px 43px;
+  animation: keeperFlail 0.42s ease-in-out infinite alternate;
+}
+.shooting .keeper-limbs {
+  animation: keeperReach 0.32s ease-in-out infinite;
+}
+.saved .keeper.angry .keeper-arms,
+.saved .keeper.angry .keeper-gloves,
+.returning .keeper.angry .keeper-arms,
+.returning .keeper.angry .keeper-gloves {
+  animation: none;
+}
+.saved .keeper .keeper-limbs {
+  animation: keeperCatch 0.45s ease-in-out infinite;
+}
+.returning .keeper .keeper-limbs {
+  animation: keeperThrow 0.55s ease-in-out infinite;
+}
+.shooting .ball-shadow,
+.shooting .ball-type,
+.uploading .ball-shadow,
+.uploading .ball-type,
+.success .ball-type,
+.saved .ball-type,
+.returning .ball-type,
+.error .ball-type {
+  opacity: 0;
+}
+.uploading .net,
+.success .net {
+  animation: netRipple 0.6s ease-out 1;
+}
+.uploading .crowd-section,
+.success .crowd-section {
+  animation: sectionCheer 0.52s ease-in-out var(--section-delay) infinite;
+}
+.uploading .fan-0,
+.success .fan-0 {
+  animation: fanCheer 0.42s ease-in-out var(--delay) infinite;
+}
+.uploading .arm-left,
+.success .arm-left {
+  transform: rotate(155deg);
+}
+.uploading .arm-right,
+.success .arm-right {
+  transform: rotate(-155deg);
+}
+/* Everyone jumps; a smaller alternating group leads the arm waves. */
+.uploading .fan-0 .arm-left,
+.success .fan-0 .arm-left {
+  animation: armCheer 0.35s ease-in-out var(--delay) infinite alternate;
+}
+.uploading .fan-3 .arm-right,
+.success .fan-3 .arm-right {
+  animation: armCheerRight 0.4s ease-in-out var(--delay) infinite alternate;
+}
+.uploading .flag,
+.success .flag {
+  animation: flagWave 0.33s ease-in-out var(--delay) infinite;
+}
+.saved .crowd-section,
+.returning .crowd-section,
+.error .crowd-section {
+  animation: sectionOhh 0.7s ease-in-out var(--section-delay) infinite;
+}
+.saved .arm,
+.returning .arm,
+.error .arm {
+  transform: rotate(160deg);
+}
+.saved .arm-right,
+.returning .arm-right,
+.error .arm-right {
+  transform: rotate(-160deg);
+}
+.confetti {
+  position: absolute;
+  inset: 0;
+  z-index: 12;
+  pointer-events: none;
+  overflow: hidden;
+}
+.confetti i {
+  position: absolute;
+  top: -10%;
+  width: 6px;
+  height: 11px;
+  background: var(--piece);
+  animation: confettiFall 2.3s linear var(--delay) infinite;
+  transform: rotate(var(--turn));
+}
+.drop-overlay {
+  display: none;
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  background: #183d32ee;
+  border: 3px dashed #c4e1a6;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #f1f4df;
+  gap: 10px;
+}
+.drop-overlay > span {
+  font-size: 45px;
+}
+.drop-overlay strong {
+  font-size: 24px;
+}
+.drop-overlay small {
+  font-size: 12px;
+}
+.files-over .drop-overlay {
+  display: flex;
+}
+.commentary-box {
+  display: flex;
+  gap: 11px;
+  align-items: center;
+  background: #f0f3e8;
+  padding: 18px 17px;
+  border-radius: 0 0 10px 10px;
+  min-height: 79px;
+}
+.commentator-mark {
+  color: #df7855;
+  font-size: 27px;
+}
+.commentary-box h3 {
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  font-weight: 850;
+}
+.commentary-box p {
+  color: #6a7869;
+  font-size: 10px;
+  margin-top: 5px;
+  line-height: 1.5;
+}
+.upload-percent {
+  margin-left: auto;
+  font-size: 19px;
+  font-weight: 800;
+  color: #457953;
+  font-variant-numeric: tabular-nums;
+}
+.upload-progress.indeterminate span {
+  animation: uploadPending 1.4s ease-in-out infinite alternate;
+}
+@keyframes uploadPending {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(186%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .upload-progress.indeterminate span {
+    animation: none;
+  }
+}
+.upload-progress {
+  height: 3px;
+  background: #e0e9d8;
+  margin-top: -3px;
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.upload-progress span {
+  display: block;
+  height: 100%;
+  background: #5f9968;
+  transition: width 0.3s linear;
+}
+.game-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 18px;
+  color: #8d9890;
+  font-size: 9px;
+  gap: 10px;
+}
+.game-footer > div {
+  display: flex;
+  gap: 12px;
+}
+.quiet-button {
+  border: 0;
+  padding: 0;
+  background: none;
+  font-size: 9px;
+  color: #7f8b83;
+  white-space: nowrap;
+}
+.sound-button {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.sound-button svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.3;
+}
+.queue-column {
+  background: #fcfcf8;
+  border-left: 1px solid var(--line);
+  padding: 26px 23px;
+  min-width: 0;
+}
+.queue-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 21px;
+  gap: 9px;
+}
+.queue-heading .eyebrow {
+  font-size: 7px;
+  letter-spacing: 1.4px;
+}
+.queue-heading h3 {
+  font-size: 18px;
+  letter-spacing: -0.5px;
+  margin-top: 6px;
+  font-weight: 750;
+}
+.queue-count {
+  font-size: 10px;
+  font-weight: 750;
+  border: 1px solid #dce1d6;
+  border-radius: 6px;
+  padding: 5px 7px;
+  color: #697666;
+  white-space: nowrap;
+}
+.drop-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 19px 8px;
+  border: 1.5px dashed #b8c6b1;
+  border-radius: 9px;
+  background: #f3f6eb;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
+}
+.drop-zone:hover {
+  background: #e8efdd;
+  border-color: #7a986b;
+}
+.upload-symbol {
+  font-size: 26px;
+  color: #698662;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 37px;
+  margin-bottom: 8px;
+  border: 1px solid #d5dfc9;
+  background: #e9efde;
+  border-radius: 10px;
+}
+.drop-zone strong {
+  font-size: 12px;
+  font-weight: 720;
+}
+.drop-zone > span:not(.upload-symbol) {
+  font-size: 11px;
+  color: #83917c;
+  margin-top: 5px;
+}
+.drop-zone u {
+  text-underline-offset: 3px;
+  color: #5d7856;
+}
+.drop-zone small {
+  font-size: 8px;
+  letter-spacing: 0.2px;
+  color: #9ca48f;
+  margin-top: 13px;
+}
+.file-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.queue-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 17px;
+  max-height: 310px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #d5decb transparent;
+}
+.queue-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 8px;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  min-width: 0;
+}
+.queue-item.current {
+  background: #fff;
+  border: 1px solid #e0e5d7;
+  box-shadow: 0 3px 9px #35402a05;
+}
+.mini-ball {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 20%, #fff8, transparent 62%),
+    var(--ball-color);
+  color: #283736bf;
+  font-size: 18px;
+  box-shadow:
+    inset -2px -3px 4px #172f382f,
+    0 2px 2px #38452a15;
+  transform: rotate(-13deg);
+}
+.file-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+  gap: 5px;
+}
+.file-info strong {
+  font-size: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 650;
+}
+.file-info > span {
+  font-size: 8px;
+  color: #969f92;
+}
+.current .file-info > span {
+  color: #7e9165;
+}
+.remove-file {
+  border: 0;
+  background: none;
+  color: #a4ada0;
+  font-size: 18px;
+  line-height: 20px;
+  padding: 0 2px;
+}
+.remove-file:hover {
+  color: #c9634b;
+}
+.clear-button {
+  display: block;
+  margin: 10px 0 0 auto;
+  border: 0;
+  background: none;
+  color: #909c86;
+  font-size: 8px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  padding: 4px;
+}
+.empty-queue {
+  text-align: center;
+  padding: 30px 0 25px;
+}
+.empty-balls {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin-bottom: 15px;
+  opacity: 0.4;
+}
+.empty-balls i {
+  width: 21px;
+  height: 21px;
+  border-radius: 50%;
+  border: 1.5px dashed #96a48b;
+}
+.empty-balls i:nth-child(2) {
+  transform: translateY(-5px);
+}
+.empty-queue strong {
+  font-size: 11px;
+  color: #829077;
+  font-weight: 600;
+}
+.empty-queue p {
+  font-size: 10px;
+  line-height: 1.6;
+  color: #a1aa98;
+  margin-top: 7px;
+}
+.type-legend {
+  border-top: 1px solid #e7eadf;
+  padding-top: 19px;
+  margin-top: 17px;
+}
+.type-legend > .eyebrow {
+  font-size: 7px;
+  letter-spacing: 0.8px;
+}
+.type-legend > div {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 13px 8px;
+  margin-top: 13px;
+}
+.type-legend > div > span {
+  font-size: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #819077;
+}
+.type-legend i {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+.pdf-dot {
+  background: #f36d55;
+}
+.doc-dot {
+  background: #65aafa;
+}
+.sheet-dot {
+  background: #5fd4a0;
+}
+.image-dot {
+  background: #bc9afa;
+}
+.slide-dot {
+  background: #ffbc5b;
+}
+.other-dot {
+  background: #c5cacf;
+}
+.completed-files {
+  border-top: 1px solid #e7eadf;
+  margin-top: 23px;
+  padding-top: 16px;
+}
+.completed-files h4 {
+  font-size: 10px;
+  font-weight: 650;
+  display: flex;
+  justify-content: space-between;
+  color: #728369;
+  margin-bottom: 10px;
+}
+.completed-files h4 > span {
+  background: #e8f1df;
+  border-radius: 3px;
+  padding: 0 4px;
+}
+.completed-file {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  padding: 6px 0;
+}
+.checkmark {
+  font-size: 10px;
+  color: #71a566;
+}
+.completed-file strong {
+  font-size: 9px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  color: #7a8772;
+}
+.completed-file small {
+  font-size: 7px;
+  color: #96a08c;
+}
+.notice-area {
+  border-top: 1px solid var(--line);
+  padding: 12px 24px;
+  color: #86927f;
+  font-size: 9px;
+  background: #fcfdf9;
+  line-height: 1.5;
+  min-height: 39px;
+}
+@keyframes sectionSway {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-1.5px);
+  }
+}
+@keyframes sectionCheer {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-0.5deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(0.5deg);
+  }
+}
+@keyframes fanCheer {
+  0%,
+  100% {
+    translate: 0 0;
+    rotate: -5deg;
+  }
+  50% {
+    translate: 0 -8px;
+    rotate: 7deg;
+  }
+}
+@keyframes sectionOhh {
+  0%,
+  100% {
+    transform: translateY(1px) rotate(-0.7deg);
+  }
+  50% {
+    transform: translateY(3px) rotate(0.7deg);
+  }
+}
+@keyframes flagWave {
+  0%,
+  100% {
+    transform: rotate(-15deg) skewY(-7deg);
+  }
+  50% {
+    transform: rotate(26deg) skewY(7deg);
+  }
+}
+@keyframes armCheer {
+  to {
+    transform: rotate(200deg);
+  }
+}
+@keyframes armCheerRight {
+  to {
+    transform: rotate(-200deg);
+  }
+}
+@keyframes keeperReady {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(2px) scaleY(0.97);
+  }
+}
+@keyframes keeperThrow {
+  0% {
+    transform: rotate(-18deg);
+  }
+  45% {
+    transform: rotate(17deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
+@keyframes keeperUpset {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-5deg);
+  }
+  50% {
+    transform: translateY(-3px) rotate(5deg);
+  }
+}
+@keyframes keeperFlail {
+  from {
+    transform: rotate(-9deg) translateY(0);
+  }
+  to {
+    transform: rotate(9deg) translateY(-7px);
+  }
+}
+@keyframes keeperSteam {
+  from {
+    translate: 0 0;
+    scale: 1;
+  }
+  to {
+    translate: 1px -3px;
+    scale: 1.2;
+  }
+}
+@keyframes keeperCatch {
+  0%,
+  100% {
+    transform: translateY(1px) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(3px) rotate(2deg);
+  }
+}
+@keyframes keeperReach {
+  0%,
+  100% {
+    transform: rotate(-4deg) scaleY(0.98);
+  }
+  50% {
+    transform: rotate(4deg) scaleY(1.03);
+  }
+}
+@keyframes netRipple {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.025, 0.95);
+  }
+}
+@keyframes confettiFall {
+  0% {
+    top: -10%;
+    rotate: 0deg;
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    top: 110%;
+    rotate: 530deg;
+    opacity: 0;
+  }
+}
+.reduced-motion * {
+  animation: none !important;
+  transition: none !important;
+}
+.reduced-motion.returning .match-ball {
+  left: 50%;
+  top: 82%;
+  transform: translate(-50%, -50%);
+}
+.reduced-motion .confetti {
+  display: none;
+}
+@container (max-width:800px) {
+  .arena-layout {
+    grid-template-columns: minmax(0, 1fr) 250px;
+  }
+  .game-column {
+    padding: 16px;
+  }
+  .queue-column {
+    padding: 21px 16px;
+  }
+  .match-bar .match-number {
+    display: none;
+  }
+  .match-bar {
+    padding: 12px;
+  }
+  .game-footer > span {
+    display: none;
+  }
+  .game-footer {
+    justify-content: flex-end;
+  }
+  .arena-header {
+    padding: 22px;
+  }
+  .fan {
+    scale: 0.85;
+  }
+  .stands {
+    overflow: hidden;
+  }
+  .pitch-instruction {
+    font-size: 5px;
+  }
+  .commentary-box {
+    padding: 13px;
+  }
+  .commentary-box h3 {
+    font-size: 10px;
+  }
+  .commentary-box p {
+    font-size: 9px;
+  }
+}
+@container (max-width:610px) {
+  .arena-layout {
+    grid-template-columns: 1fr;
+  }
+  .queue-column {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+    padding: 22px;
+  }
+  .arena-header {
+    padding: 19px 20px;
+  }
+  .arena-brand .eyebrow {
+    font-size: 6px;
+    letter-spacing: 1px;
+  }
+  .preview-badge {
+    font-size: 6px;
+    padding: 6px;
+  }
+  .brand-icon {
+    width: 37px;
+    height: 37px;
+  }
+  .arena-brand {
+    gap: 9px;
+  }
+  h2 {
+    font-size: 23px;
+  }
+  .game-column {
+    padding: 16px;
+  }
+  .queue-heading {
+    margin-bottom: 15px;
+  }
+  .drop-zone {
+    padding: 15px;
+  }
+  .empty-queue {
+    padding: 23px 0 10px;
+  }
+  .queue-list {
+    max-height: 240px;
+  }
+  .type-legend > div {
+    grid-template-columns: repeat(6, 1fr);
+  }
+  .game-footer > span {
+    display: block;
+  }
+  .game-footer {
+    justify-content: space-between;
+  }
+  .fan {
+    scale: 0.8;
+  }
+  .match-bar .match-number {
+    display: flex;
+  }
+  .notice-area {
+    padding: 12px 20px;
+  }
+  .commentary-box h3 {
+    font-size: 11px;
+  }
+  .pitch-instruction {
+    font-size: 6px;
+  }
+  .preview-badge i {
+    display: none;
+  }
+}
+@container (max-width:380px) {
+  .arena-header {
+    padding: 16px;
+  }
+  .arena-brand .eyebrow {
+    max-width: 120px;
+    line-height: 1.5;
+  }
+  .game-column {
+    padding: 11px;
+  }
+  .match-bar .match-number {
+    display: none;
+  }
+  .game-footer > span {
+    display: none;
+  }
+  .game-footer {
+    justify-content: flex-end;
+  }
+  .banner-center {
+    display: none;
+  }
+  .stadium-banner {
+    font-size: 5px;
+  }
+  .stadium-roof {
+    font-size: 5px;
+    padding-top: 4px;
+  }
+  .pitch-instruction {
+    display: none;
+  }
+  .type-legend > div {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .score small {
+    font-size: 6px;
+  }
+  .commentary-box p {
+    font-size: 9px;
+  }
+  .fan {
+    scale: 0.6;
+  }
+}

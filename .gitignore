@@ -1,0 +1,11 @@
+node_modules/
+.sf/
+.sfdx/
+.localdevserver/
+.env
+.env.*
+*.log
+coverage/
+.DS_Store
+prototypes/penalty-file-upload/dist/
+.mdapi/

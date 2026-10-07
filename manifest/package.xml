@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types><members>MatchdayFileUploadController</members><members>MatchdayFileUploadControllerTest</members><name>ApexClass</name></types>
+    <types><members>ContentVersion.Matchday_Upload_Key__c</members><name>CustomField</name></types>
+    <types><members>penaltyFileUpload</members><members>matchdayRecordUpload</members><name>LightningComponentBundle</name></types>
+    <types><members>Matchday_File_Upload</members><name>PermissionSet</name></types>
+    <version>67.0</version>
+</Package>

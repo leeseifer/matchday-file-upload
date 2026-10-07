@@ -1,0 +1,15 @@
+<template>
+  <template lwc:if={recordId}>
+    <c-penalty-file-upload
+      record-id={recordId}
+      max-file-bytes={maxFileBytes}
+      upload-indeterminate
+      onuploadrequest={handleUploadRequest}
+    ></c-penalty-file-upload>
+  </template>
+  <template lwc:else>
+    <p class="slds-box slds-theme_default" role="status">
+      Open a saved record to upload files with Matchday.
+    </p>
+  </template>
+</template>

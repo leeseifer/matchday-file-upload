@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Matchday — a playful football file uploader. Local Lightning Web Component preview."
+    />
+    <title>Matchday · File upload, with a little fanfare.</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        color: #29352f;
+        background: #f4f5f0;
+        font-family:
+          Inter,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        font-size: 14px;
+      }
+      button,
+      select {
+        font: inherit;
+        color: inherit;
+      }
+      button {
+        cursor: pointer;
+      }
+      button:focus-visible,
+      select:focus-visible {
+        outline: 3px solid #e8a457;
+        outline-offset: 4px;
+      }
+      .topbar {
+        height: 64px;
+        background: #fff;
+        border-bottom: 1px solid #e0e5db;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 5%;
+        gap: 20px;
+      }
+      .logo {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+        font-size: 17px;
+      }
+      .logo-icon {
+        background: #284a3d;
+        width: 26px;
+        height: 26px;
+        border-radius: 7px;
+        display: grid;
+        place-items: center;
+        color: #eceddd;
+        font-size: 20px;
+        transform: rotate(-8deg);
+      }
+      .nav {
+        display: flex;
+        gap: 26px;
+        margin-left: 35px;
+        font-size: 11px;
+        color: #879286;
+        align-items: center;
+      }
+      .nav b {
+        color: #3e5a43;
+        font-weight: 650;
+        height: 64px;
+        display: flex;
+        align-items: center;
+        border-bottom: 2px solid #5c775a;
+      }
+      .top-left {
+        display: flex;
+        align-items: center;
+      }
+      .local-label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #8b9485;
+        font-size: 9px;
+        letter-spacing: 1px;
+      }
+      .local-label i {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #98b38c;
+      }
+      .avatar {
+        width: 27px;
+        height: 27px;
+        display: grid;
+        place-items: center;
+        font-size: 9px;
+        background: #e9edde;
+        color: #6c785e;
+        border: 1px solid #dce3d3;
+        border-radius: 50%;
+        margin-left: 12px;
+      }
+      main {
+        max-width: 1120px;
+        margin: 35px auto 48px;
+        padding: 0 30px;
+        transition: max-width 0.25s;
+      }
+      .breadcrumb {
+        font-size: 10px;
+        color: #949e8e;
+        display: flex;
+        gap: 9px;
+        align-items: center;
+        margin-bottom: 18px;
+      }
+      .breadcrumb strong {
+        font-weight: 500;
+        color: #53664c;
+      }
+      .record {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 30px;
+      }
+      .record-title {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+      .record-icon {
+        width: 43px;
+        height: 43px;
+        border: 1px solid #e4cead;
+        border-radius: 11px;
+        background: #f2e5ce;
+        color: #ae8850;
+        display: grid;
+        place-items: center;
+        font-size: 12px;
+        font-weight: 750;
+      }
+      .record h1 {
+        margin: 0;
+        font-size: 24px;
+        letter-spacing: -0.9px;
+        font-weight: 750;
+      }
+      .record p {
+        margin: 5px 0 0;
+        font-size: 10px;
+        color: #96a08e;
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+      .record p b {
+        font-weight: 500;
+        color: #6f8066;
+      }
+      .record-actions {
+        display: flex;
+        gap: 8px;
+      }
+      .record-actions select,
+      .record-actions button {
+        border: 1px solid #dce2d5;
+        background: #fafbf7;
+        border-radius: 6px;
+        padding: 8px 10px;
+        font-size: 9px;
+        color: #7a8870;
+        cursor: pointer;
+      }
+      .intro {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        margin-bottom: 16px;
+        gap: 20px;
+      }
+      .intro h2 {
+        font-size: 13px;
+        letter-spacing: -0.1px;
+        margin: 0 0 5px;
+        font-weight: 650;
+      }
+      .intro p {
+        margin: 0;
+        font-size: 10px;
+        color: #96a08f;
+        line-height: 1.6;
+      }
+      .intro-tag {
+        font-size: 8px;
+        color: #a5ad9a;
+        letter-spacing: 1px;
+        white-space: nowrap;
+      }
+      .preview-tools {
+        margin-top: 20px;
+        border: 1px solid #e0e5d8;
+        border-radius: 11px;
+        padding: 15px 18px;
+        background: #edefe6;
+        display: flex;
+        justify-content: space-between;
+        gap: 14px;
+        align-items: center;
+      }
+      .preview-tools h3 {
+        font-size: 10px;
+        letter-spacing: 0.4px;
+        margin: 0 0 5px;
+        color: #677760;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .preview-tools h3 span {
+        font-size: 13px;
+      }
+      .preview-tools p {
+        font-size: 9px;
+        color: #96a18a;
+        margin: 0;
+        line-height: 1.5;
+      }
+      .tool-buttons {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+      .tool-buttons button {
+        font-size: 8px;
+        border: 1px solid #dce2d1;
+        border-radius: 5px;
+        padding: 8px 10px;
+        background: #f6f8ef;
+        color: #849378;
+        white-space: nowrap;
+      }
+      .tool-buttons button[aria-pressed="true"] {
+        background: #fff;
+        border-color: #acbc9e;
+        color: #526c43;
+        box-shadow: 0 1px 3px #33521c0d;
+      }
+      .tool-buttons button#samples {
+        background: #dce8d0;
+        border-color: #c9d8ba;
+        color: #61784e;
+        font-weight: 650;
+        margin-left: 5px;
+      }
+      .demo-status {
+        margin: 9px 18px 0;
+        font-size: 9px;
+        color: #95a087;
+        min-height: 15px;
+      }
+      .page-footer {
+        margin-top: 25px;
+        display: flex;
+        justify-content: space-between;
+        color: #a0aa96;
+        font-size: 8px;
+        line-height: 1.6;
+        gap: 15px;
+      }
+      .page-footer strong {
+        font-weight: 600;
+        color: #8c9b80;
+      }
+      main.compact {
+        max-width: 490px;
+      }
+      main.compact .nav,
+      main.compact .intro-tag {
+        display: none;
+      }
+      main.compact .record,
+      main.compact .preview-tools {
+        align-items: start;
+        flex-direction: column;
+      }
+      main.compact .record h1 {
+        font-size: 20px;
+      }
+      main.compact .tool-buttons {
+        justify-content: flex-start;
+      }
+      main.compact .record-actions {
+        align-self: flex-end;
+      }
+      .noscript {
+        padding: 40px;
+      }
+      .page-footer > span:last-child {
+        white-space: nowrap;
+      }
+      @media (max-width: 680px) {
+        .topbar {
+          padding: 0 22px;
+        }
+        .nav {
+          display: none;
+        }
+        .local-label {
+          font-size: 7px;
+          letter-spacing: 0.5px;
+        }
+        .avatar {
+          margin-left: 2px;
+        }
+        main {
+          padding: 0 17px;
+          margin-top: 24px;
+        }
+        .record h1 {
+          font-size: 21px;
+        }
+        .record {
+          flex-wrap: wrap;
+          gap: 18px;
+          margin-bottom: 25px;
+        }
+        .record-actions {
+          margin-left: auto;
+        }
+        .intro-tag {
+          display: none;
+        }
+        .preview-tools {
+          align-items: start;
+          flex-direction: column;
+        }
+        .tool-buttons {
+          justify-content: flex-start;
+        }
+        .tool-buttons button#samples {
+          margin-left: 0;
+        }
+        .page-footer {
+          flex-direction: column;
+          gap: 6px;
+        }
+        .record p {
+          font-size: 9px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="top-left">
+        <div class="logo">
+          <span class="logo-icon">↗</span>matchday<span style="color: #afbc9f"
+            >.</span
+          >
+        </div>
+        <nav class="nav" aria-label="Preview navigation">
+          <span>Workspace</span><b>Record files</b><span>Playground</span>
+        </nav>
+      </div>
+      <div class="local-label">
+        <i></i>LOCAL LWC PREVIEW<span class="avatar">LE</span>
+      </div>
+    </header>
+    <main>
+      <div class="breadcrumb">
+        <span>Workspace</span><span>/</span><span>Records</span><span>/</span
+        ><strong>File upload</strong>
+      </div>
+      <section class="record" aria-label="Sample record">
+        <div class="record-title">
+          <span class="record-icon" id="record-icon">AC</span>
+          <div>
+            <h1 id="record-name">Acme Industries</h1>
+            <p>
+              <b id="record-label">Account</b><span>·</span
+              ><span>A sample record for your test drive</span>
+            </p>
+          </div>
+        </div>
+        <div class="record-actions">
+          <select id="record-type" aria-label="Preview record type">
+            <option value="account">Account record</option>
+            <option value="case">Case record</option>
+            <option value="policy">Custom policy record</option></select
+          ><button id="compact" aria-pressed="false">▥ Compact view</button>
+        </div>
+      </section>
+      <div class="intro">
+        <div>
+          <h2>File upload, with a little fanfare.</h2>
+          <p>
+            Turn documents into footballs. Find the net. Let the crowd take it
+            from there.
+          </p>
+        </div>
+        <span class="intro-tag">BUILT FOR THE BEAUTIFUL GAME.</span>
+      </div>
+      <div id="app"></div>
+      <noscript
+        ><p class="noscript">
+          Enable JavaScript to try this Lightning Web Component.
+        </p></noscript
+      >
+      <section class="preview-tools" aria-label="Local preview controls">
+        <div>
+          <h3><span>⚑</span> Your test bench</h3>
+          <p>
+            Try the different upload reactions. These controls are for the
+            preview.
+          </p>
+        </div>
+        <div class="tool-buttons">
+          <button data-outcome="success" aria-pressed="true">
+            Normal upload</button
+          ><button data-outcome="slow" aria-pressed="false">Slow upload</button
+          ><button data-outcome="fail" aria-pressed="false">
+            Failed upload</button
+          ><button id="samples">＋ Add sample files</button>
+        </div>
+      </section>
+      <p class="demo-status" id="demo-status" role="status">
+        Next goal: a successful upload in about 4 seconds.
+      </p>
+      <footer class="page-footer">
+        <span
+          ><strong>Local review only.</strong> Uploads are simulated. File
+          contents stay in this browser and reset on refresh.</span
+        ><span>Made for records. Played for the crowd. ↗</span>
+      </footer>
+    </main>
+    <script src="app.js" defer></script>
+  </body>
+</html>

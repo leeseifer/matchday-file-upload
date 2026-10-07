@@ -1,0 +1,23 @@
+{
+  "name": "matchday-file-upload",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Football-themed Salesforce Lightning Web Component that uploads a queued file when you score.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "sfdx-lwc-jest -- --runInBand",
+    "test:watch": "sfdx-lwc-jest --watch",
+    "build:preview": "node prototypes/penalty-file-upload/build.mjs",
+    "preview": "node scripts/serve-preview.mjs",
+    "check:package": "node scripts/check-package.mjs"
+  },
+  "devDependencies": {
+    "@lwc/compiler": "8.28.2",
+    "@lwc/engine-dom": "8.28.2",
+    "@lwc/rollup-plugin": "8.28.2",
+    "@salesforce/sfdx-lwc-jest": "7.9.0",
+    "rollup": "4.63.3"
+  }
+}

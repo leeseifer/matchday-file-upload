@@ -1,0 +1,343 @@
+<template>
+  <section
+    class="upload-arena"
+    aria-label="Football document uploader"
+    ondragenter={handleDragEnter}
+    ondragover={handleDragOver}
+    ondragleave={handleDragLeave}
+    ondrop={handleDrop}
+  >
+    <header class="arena-header">
+      <div class="arena-brand">
+        <span class="brand-icon" aria-hidden="true">↗</span>
+        <div>
+          <h2>Matchday</h2>
+          <span class="eyebrow">EVERY FILE DESERVES A CELEBRATION.</span>
+        </div>
+      </div>
+      <span class="preview-badge"><i></i>{modeLabel}</span>
+    </header>
+
+    <div class="arena-layout">
+      <div class="game-column">
+        <div class="match-bar">
+          <span><i class="live-dot"></i> YOUR HOME GROUND</span>
+          <div class="score">
+            <span>{uploadedCount} <small>UPLOADED</small></span
+            ><b>:</b><span>{queueCount} <small>IN QUEUE</small></span>
+          </div>
+          <span class="match-number">MATCH 01</span>
+        </div>
+        <div class={pitchClass} style={arenaStyle}>
+          <div class="stadium-roof" aria-hidden="true">
+            <span>M A T C H D A Y &nbsp; F I L E &nbsp; C L U B</span>
+          </div>
+          <div class="stands" aria-hidden="true">
+            <div class="stand-row row-one"></div>
+            <div class="stand-row row-two"></div>
+            <div class="stand-row row-three"></div>
+            <template for:each={crowdSections} for:item="section">
+              <div key={section.id} class="crowd-section" style={section.style}>
+                <template for:each={section.fans} for:item="fan">
+                  <div key={fan.id} class={fan.className} style={fan.style}>
+                    <i class="fan-head"></i><i class="fan-body"></i
+                    ><i class="arm arm-left"></i><i class="arm arm-right"></i
+                    ><i class="flag"></i>
+                  </div>
+                </template>
+              </div>
+            </template>
+          </div>
+          <div class="stadium-banner" aria-hidden="true">
+            <span>ALL FILES. ALL HEART.</span
+            ><span class="banner-center">★ &nbsp; THE UPLOAD CLUB &nbsp; ★</span
+            ><span>MAKE SOME NOISE.</span>
+          </div>
+          <div class="turf" aria-hidden="true">
+            <div class="penalty-box"></div>
+            <div class="six-yard-box"></div>
+            <div class="penalty-arc"></div>
+            <div class="spot"></div>
+            <div class="field-line"></div>
+          </div>
+          <div class="goal" aria-hidden="true">
+            <div class="goal-depth"></div>
+            <div class="net"></div>
+            <div class="goal-frame"></div>
+          </div>
+          <div class={keeperClass} lwc:ref="keeper" aria-hidden="true">
+            <template lwc:if={keeperIsUpset}
+              ><span class="keeper-mood">?!</span></template
+            >
+            <svg viewBox="0 0 100 128" class="keeper-figure">
+              <ellipse
+                class="keeper-shadow"
+                cx="50"
+                cy="122"
+                rx="26"
+                ry="5"
+              ></ellipse>
+              <g class="keeper-limbs">
+                <path
+                  class="keeper-legs"
+                  lwc:ref="legs"
+                  d="M42 78 L34 99 L25 120 M58 78 L68 99 L78 120"
+                ></path>
+                <path class="keeper-arms" d={keeperArms}></path>
+                <path class="keeper-gloves" d={keeperGloves}></path>
+                <path
+                  class="keeper-shirt"
+                  d="M34 38 Q50 33 66 38 L62 76 Q50 84 38 76 Z"
+                ></path>
+                <path
+                  class="keeper-shorts"
+                  d="M38 74 L36 87 L48 88 L50 79 L53 88 L65 87 L62 74 Z"
+                ></path>
+                <rect
+                  class="keeper-neck"
+                  x="44"
+                  y="27"
+                  width="12"
+                  height="14"
+                  rx="3"
+                ></rect>
+                <ellipse
+                  class="keeper-head"
+                  cx="50"
+                  cy="21"
+                  rx="12"
+                  ry="15"
+                ></ellipse>
+                <path
+                  class="keeper-hair"
+                  d="M38 21 L38 11 Q50 0 62 12 L62 20 L56 12 L40 16 Z"
+                ></path>
+                <path class="keeper-face" d={keeperFace}></path>
+                <text x="50" y="62" text-anchor="middle" class="keeper-number">
+                  1
+                </text>
+                <path
+                  class="keeper-shoes"
+                  lwc:ref="shoes"
+                  d="M25 120 h-9 M78 120 h9"
+                ></path>
+              </g>
+            </svg>
+          </div>
+          <div class="ball-shadow" aria-hidden="true"></div>
+          <div class={ballPositionClass} lwc:ref="ballPosition">
+            <button
+              class={ballClass}
+              lwc:ref="ball"
+              aria-label={ballLabel}
+              onpointerdown={handlePointerDown}
+              onpointermove={handlePointerMove}
+              onpointerup={handlePointerUp}
+              onpointercancel={handlePointerCancel}
+              ondragstart={preventBallDrag}
+              draggable="false"
+              disabled={cannotShoot}
+            >
+              <svg viewBox="0 0 100 100" aria-hidden="true">
+                <defs>
+                  <radialGradient id="ballLight" cx="33%" cy="22%" r="78%">
+                    <stop
+                      offset="0%"
+                      stop-color="#fff"
+                      stop-opacity=".62"
+                    ></stop>
+                    <stop
+                      offset="55%"
+                      stop-color="#fff"
+                      stop-opacity="0"
+                    ></stop>
+                    <stop
+                      offset="100%"
+                      stop-color="#071a24"
+                      stop-opacity=".37"
+                    ></stop>
+                  </radialGradient>
+                </defs>
+                <circle cx="50" cy="50" r="47" class="ball-base"></circle>
+                <g class="ball-pattern">
+                  <path d="M50 30 L67 43 L61 62 L39 62 L33 43 Z"></path>
+                  <path
+                    d="M15 18 L28 14 L34 25 L23 39 L7 36 Z M72 14 L85 21 L91 37 L78 39 L66 25 Z M7 60 L22 58 L32 75 L26 87 L13 78 Z M79 57 L94 61 L86 79 L73 88 L68 75 Z M40 92 L39 80 L61 80 L62 92 L51 98 Z"
+                  ></path>
+                  <path
+                    class="ball-seams"
+                    d="M34 25 L50 30 L66 25 M78 39 L67 43 M68 75 L61 62 M39 62 L32 75 M23 39 L33 43"
+                  ></path>
+                </g>
+                <circle cx="50" cy="50" r="47" fill="url(#ballLight)"></circle>
+              </svg>
+            </button>
+          </div>
+          <span class="ball-type">{activeType}</span>
+          <div class="pitch-instruction">
+            <span class="flick-arrow">↗</span> GRAB. FLICK. GOAL.
+          </div>
+          <template lwc:if={isCelebrating}
+            ><div class="confetti" aria-hidden="true">
+              <template for:each={confetti} for:item="piece"
+                ><i key={piece.id} style={piece.style}></i
+              ></template></div
+          ></template>
+          <div class="drop-overlay" aria-hidden="true">
+            <span>＋</span><strong>Drop it like a goal.</strong
+            ><small>Up to 10 files. One big celebration.</small>
+          </div>
+        </div>
+        <div class="commentary-box" role="status" aria-live="polite">
+          <div class="commentator-mark" aria-hidden="true">✦</div>
+          <div>
+            <h3>{statusTitle}</h3>
+            <p>{statusDetail}</p>
+          </div>
+          <template lwc:if={showUploadPercent}
+            ><span class="upload-percent">{progressLabel}</span></template
+          >
+        </div>
+        <template lwc:if={isUploading}
+          ><div
+            class={progressClass}
+            role="progressbar"
+            aria-label="File upload progress"
+            aria-valuenow={progressValue}
+            aria-valuemin="0"
+            aria-valuemax="100"
+          >
+            <span style={progressStyle}></span></div
+        ></template>
+        <div class="game-footer">
+          <span>Fast flick. Big kick. Gentle flick. Soft touch.</span>
+          <div>
+            <button
+              class="quiet-button"
+              onclick={toggleMotion}
+              aria-pressed={reducedMotion}
+            >
+              {motionLabel}</button
+            ><button
+              class="quiet-button sound-button"
+              onclick={toggleSound}
+              aria-label={soundLabel}
+              aria-pressed={soundEnabled}
+            >
+              <svg viewBox="0 0 20 20" aria-hidden="true">
+                <path
+                  d="M3 8 H6 L11 4 V16 L6 12 H3 Z M14 7 Q17 10 14 13"
+                ></path></svg
+              >{soundText}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <aside class="queue-column" aria-label="File queue">
+        <div class="queue-heading">
+          <div>
+            <span class="eyebrow">THE STARTING LINE-UP</span>
+            <h3>Your ball queue</h3>
+          </div>
+          <span class="queue-count">{queueLabel}</span>
+        </div>
+        <button class="drop-zone" onclick={openPicker}>
+          <span class="upload-symbol" aria-hidden="true">↥</span
+          ><strong>Drop files. Make goals.</strong
+          ><span>or <u>browse your files</u></span
+          ><small>{fileLimitLabel}</small>
+        </button>
+        <input
+          class="file-input"
+          type="file"
+          multiple
+          onchange={handleFileChange}
+          aria-label="Select documents to queue"
+          tabindex="-1"
+        />
+        <template lwc:if={hasFiles}>
+          <div class="queue-list" role="list">
+            <template for:each={queueItems} for:item="file"
+              ><div
+                key={file.id}
+                class={file.className}
+                style={file.style}
+                role="listitem"
+              >
+                <span class="mini-ball" aria-hidden="true">⬟</span>
+                <div class="file-info">
+                  <strong title={file.name}>{file.name}</strong
+                  ><span>{file.subtitle}</span>
+                </div>
+                <button
+                  class="remove-file"
+                  data-id={file.id}
+                  onclick={removeFile}
+                  disabled={file.disabled}
+                  aria-label={file.removeLabel}
+                >
+                  ×
+                </button>
+              </div></template
+            >
+          </div>
+          <button class="clear-button" onclick={clearQueue} disabled={busy}>
+            Clear queue
+          </button>
+        </template>
+        <template lwc:else
+          ><div class="empty-queue">
+            <div class="empty-balls" aria-hidden="true">
+              <i></i><i></i><i></i>
+            </div>
+            <strong>A team waiting to happen.</strong>
+            <p>
+              Your files line up here.<br />The first one takes the penalty.
+            </p>
+          </div></template
+        >
+        <div class="type-legend">
+          <span class="eyebrow">DIFFERENT FILES. DIFFERENT KITS.</span>
+          <div>
+            <span><i class="pdf-dot"></i>PDF</span
+            ><span><i class="doc-dot"></i>Docs</span
+            ><span><i class="sheet-dot"></i>Sheets</span
+            ><span><i class="image-dot"></i>Images</span
+            ><span><i class="slide-dot"></i>Slides</span
+            ><span><i class="other-dot"></i>Other</span>
+          </div>
+        </div>
+        <template lwc:if={hasCompleted}
+          ><div class="completed-files">
+            <h4>In the back of the net <span>{uploadedCount}</span></h4>
+            <template for:each={completed} for:item="file"
+              ><div class="completed-file" key={file.id}>
+                <span class="checkmark">✓</span>
+                <template lwc:if={file.url}
+                  ><a
+                    href={file.url}
+                    target="_blank"
+                    rel="noopener"
+                    title={file.name}
+                    >{file.name}</a
+                  ></template
+                >
+                <template lwc:else
+                  ><strong title={file.name}>{file.name}</strong></template
+                >
+                <small>{file.label}</small>
+              </div></template
+            >
+          </div></template
+        >
+      </aside>
+    </div>
+    <div class="notice-area" role="status" aria-live="polite">
+      <template lwc:if={hasNotice}><span>{notice}</span></template
+      ><template lwc:else
+        ><span>Every document gets its moment in the spotlight.</span></template
+      >
+    </div>
+  </section>
+</template>

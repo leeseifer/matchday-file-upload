@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>67.0</apiVersion>
+    <isExposed>false</isExposed>
+    <masterLabel>Matchday File Upload (Preview)</masterLabel>
+    <description
+  >Football file upload interface. Local review stage; requires an upload adapter before production use.</description>
+</LightningComponentBundle>
